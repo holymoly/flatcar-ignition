@@ -1,0 +1,34 @@
+{
+    "ignition":
+    {
+        "version": "2.2.0"
+    },
+    "passwd":
+    {
+        "users": [
+        {
+            "name": "core",
+            "sshAuthorizedKeys": [
+                "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQDRtZPvgplu1aPhl4fGc/D+qCYl+MgCQznqZ2u0zjo0EGvv5ByWUQkZo3fMH1iDbjAX961DaqnFoZCm9Tk1s/kyJ/Y2PgV84vm0f0Q++Ma05LdnBg6Kj+X5mUC65UAQnKBznkXEyI0KRmaGoKarJ9fk7LbKkcW6E910CrLXma01bquuW+lO++qa2V0Q8BLACLLXA2u4EpC875BbFkYpgVrKho/PYqry0Crr/CDJNsrt9nH0cCMnitqEk5IIxoVQkm50mppblFsSOcZzktLcre/d6bEVjtN3WuoADyofS4o/M4MAek/QEQP6xKiLgow6UhmJ7L52nzvh8bC5GkB5pvebpG8ivFRbMDcpyNL0RG3Z2c2mpcmKlvt+PNY65AJaoWAXB4W2h0688JEa/oWdxgsQWri+yIv84JBRCUk1uzuXngb6Xitje5hWO0XhDEti/awPuysn9RLGneuS0+Fct2qOxXm5Ru+bXHBl9D/cj717rGRqJOX0KUMTp/qpvrALMrXjSMeIvZ416KzDhme3RVoEepiJYp5eIiUZCJ9uvBt/oa0DM8ztvaavLz86k7feszQD6sN7SALl/xuEEbODWZEKMS80tQCFQsBl4s3Hq6VA5GkEmVzytWYh5VVAklvKCN3hS3UBvVv7wiPab397X6as43Koqs2aJvOkbezxOeqzXw== holymoly"
+            ]
+        }]
+    },
+    "storage":
+    {
+        "directories": [
+        {
+            "filesystem": "root",
+            "path": "/mnt/pgdata/",
+            "mode": 420
+        }]
+    },
+    "systemd":
+    {
+        "units": [
+        {
+            "name": "postgres.service",
+            "enabled": true,
+            "contents": "[Service]\nTimeoutStartSec=0\nExecStartPre=-/usr/bin/docker kill postgres1\nExecStartPre=-/usr/bin/docker rm postgres1\nExecStartPre=/usr/bin/docker pull postgres\nExecStart=/usr/bin/docker run --name postgres1 -e POSTGRES_PASSWD=postgres -e PGDATA=/var/lib/postgresql/data/pgdata -v /mnt/pgdata:/var/lib/postgresql/data  --restart unless-stopped postgres\n[Install]\nWantedBy=multi-user.target"
+        }]
+    }
+}
