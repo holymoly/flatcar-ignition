@@ -19,7 +19,7 @@
         {
             "filesystem": "root",
             "path": "/mnt/pgdata/",
-            "mode": 420
+            "mode": 755
         }]
     },
     "systemd":
