@@ -19,7 +19,7 @@
         {
             "name": "api-items.service",
             "enabled": true,
-            "contents": "[Service]\nTimeoutStartSec=0\nExecStartPre=-/usr/bin/docker kill apit-items1\nExecStartPre=-/usr/bin/docker rm api-items1\nExecStartPre=/usr/bin/docker pull api-items\nExecStart=/usr/bin/docker run --name api-items1 -e PGUSER=postgres -e PGPASSWORD=postgres -e PGHOST="10.42.23.10" -e PGDATABASE=items --restart unless-stopped api-items\n[Install]\nWantedBy=multi-user.target"
+            "contents": "[Service]\nTimeoutStartSec=0\nExecStartPre=-/usr/bin/docker kill apit-items1\nExecStartPre=-/usr/bin/docker rm api-items1\nExecStartPre=/usr/bin/docker pull api-items\nExecStart=/usr/bin/docker run --name api-items1 -e PGUSER=postgres -e PGPASSWORD=postgres -e PGHOST='10.42.23.10' -e PGDATABASE=items --restart unless-stopped api-items\n[Install]\nWantedBy=multi-user.target"
         }]
     }
 }
