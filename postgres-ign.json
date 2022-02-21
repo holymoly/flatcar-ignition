@@ -28,7 +28,7 @@
         {
             "name": "postgres.service",
             "enabled": true,
-            "contents": "[Service]\nTimeoutStartSec=0\nExecStartPre=-/usr/bin/docker kill postgres1\nExecStartPre=-/usr/bin/docker rm postgres1\nExecStartPre=/usr/bin/docker pull postgres\nExecStart=/usr/bin/docker run --name postgres1 -p 5432:5432 -e POSTGRES_PASSWORD=postgres -e PGDATA=/var/lib/postgresql/data/pgdata -v /mnt/pgdata:/var/lib/postgresql/data  --restart unless-stopped postgres\n[Install]\nWantedBy=multi-user.target"
+            "contents": "[Service]\nTimeoutStartSec=0\nExecStartPre=-/usr/bin/docker kill postgres1\nExecStartPre=-/usr/bin/docker rm postgres1\nExecStartPre=/usr/bin/docker pull postgres\nExecStart=/usr/bin/docker run --name postgres1 -p 5432:5432 -e DATABUSUSER=test -e POSTGRES_PASSWORD=test -e PGDATA=/var/lib/postgresql/data/pgdata -v /mnt/pgdata:/var/lib/postgresql/data  --restart unless-stopped postgres\n[Install]\nWantedBy=multi-user.target"
         }]
     }
 }
