@@ -19,7 +19,7 @@
         {
             "name": "mqtt.service",
             "enabled": true,
-            "contents": "[Service]\nTimeoutStartSec=0\nExecStartPre=-/usr/bin/docker kill mqtt1\nExecStartPre=-/usr/bin/docker rm mqtt1\nExecStartPre=/usr/bin/docker pull rabbitmq:3-management\nExecStart=/usr/bin/docker run --name mqtt1 -e RABBITMQ_DEFAULT_USER=test -e RABBITMQ_DEFAULT_PASS=test -p 8080:15672 -p 1883:1883  --restart unless-stopped rabbitmq:3-management\n[Install]\nWantedBy=multi-user.target"
+            "contents": "[Service]\nTimeoutStartSec=0\nExecStartPre=-/usr/bin/docker kill mqtt1\nExecStartPre=-/usr/bin/docker rm mqtt1\nExecStartPre=/usr/bin/docker pull rabbitmq:3-management\nExecStart=/usr/bin/docker run --name mqtt1 -e RABBITMQ_DEFAULT_USER=test -e RABBITMQ_DEFAULT_PASS=test -p 15672:15672 -p 1883:1883  --restart unless-stopped rabbitmq:3-management\n[Install]\nWantedBy=multi-user.target"
         }]
     }
 }
