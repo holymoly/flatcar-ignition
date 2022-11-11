@@ -28,7 +28,7 @@
         {
             "name": "rancher.service",
             "enabled": true,
-            "contents": "[Service]\nTimeoutStartSec=0\nExecStartPre=-/usr/bin/docker kill rancher1\nExecStartPre=-/usr/bin/docker rm rancher1\nExecStartPre=/usr/bin/docker pull rancher/rancher\nExecStart=/usr/bin/docker run --name rancher1 -p 8080:80 -p 8443:443 -v /opt/rancher:/var/lib/rancher --restart unless-stopped --privileged rancher/rancher\n[Install]\nWantedBy=multi-user.target"
+            "contents": "[Service]\nTimeoutStartSec=0\nExecStartPre=-/usr/bin/docker kill rancher1\nExecStartPre=-/usr/bin/docker rm rancher1\nExecStartPre=/usr/bin/docker pull rancher/rancher\nExecStart=/usr/bin/docker run --name rancher1 -p 8080:80 -p 8443:443 -v /opt/rancher:/var/lib/rancher --restart unless-stopped -e CATTLE_BOOTSTRAP_PASSWORD=changepassword --privileged rancher/rancher\n[Install]\nWantedBy=multi-user.target"
         }]
     }
 }
